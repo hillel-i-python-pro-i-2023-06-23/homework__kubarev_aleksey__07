@@ -1,7 +1,8 @@
-# Docker. Packing a simple script.
+# Homework №7 
+Python. Organize output. Groups and humans.
 
 ---
-![Main workflow](https://github.com/hillel-i-python-pro-i-2023-06-23/homework__kubarev_aleksey__05/actions/workflows/main-workflow.yml/badge.svg)
+![Main workflow](https://github.com/hillel-i-python-pro-i-2023-06-23/homework__kubarev_aleksey__07/actions/workflows/main-workflow.yml/badge.svg)
 
 ## 🏠 Homework
 

@@ -1,20 +1,17 @@
 import random
 from dataclasses import dataclass, field
 from typing import TypeAlias, TypedDict
-
+from collections import defaultdict
 from faker import Faker
 
 T_GROUP_NAME: TypeAlias = str
 T_GROUP_NAMES: TypeAlias = list[T_GROUP_NAME]
 
-
 class Human(TypedDict):
     name: str
     group: T_GROUP_NAME
 
-
 T_HUMANS: TypeAlias = list[Human]
-
 
 @dataclass
 class DataProvider:
@@ -54,32 +51,21 @@ class DataProvider:
         _groups = self._generate_group_names(amount=amount_of_groups)
         return self._generate_humans(groups=_groups, amount_of_humans=amount_of_humans)
 
+def organize_data(humans: T_HUMANS) -> dict:
+    data_structure = defaultdict(list)
+    for human in humans:
+        group = human['group']
+        data_structure[group].append(human['name'])
+    return data_structure
 
-def organize_data(humans: T_HUMANS):
-    """
-    Organize data in way, useful for further processing.
-    At this stage not allowed to make output string.
-    """
-    ...
-
-
-def get_formatted_output(data) -> str:
-    """
-    Get output string. That can be used to print in console.
-    """
-    ...
-
+def get_formatted_output(data: dict) -> str:
+    output = ""
+    for group, members in data.items():
+        output += f"Group: {group} -> has {len(members)} members -> {', '.join(members)}.\n"
+    return output
 
 def main():
-    """
-    You have a list of humans. Every human have "name" and "group".
-    Your task is to show all groups, with amount and names of members of each group.
-    """
     group_members = DataProvider().generate_group_members()
     organized_data = organize_data(humans=group_members)
     output = get_formatted_output(data=organized_data)
     print(output)
-
-
-if __name__ == "__main__":
-    main()
